@@ -2,7 +2,7 @@
   "name": "pouch-pid",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "built/initialize.js",
   "scripts": {
     "test": "jest"
   },
