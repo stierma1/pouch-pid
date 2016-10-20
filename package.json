@@ -1,0 +1,51 @@
+{
+  "name": "pouch-pid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stierma1/pouch-pid.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stierma1/pouch-pid/issues"
+  },
+  "homepage": "https://github.com/stierma1/pouch-pid#readme",
+  "dependencies": {
+    "geopouch": "^2.0.3",
+    "memdown": "^1.2.2",
+    "pid-system": "^2.0.3",
+    "pouch-datalog": "^1.0.0",
+    "pouchdb": "^6.0.0",
+    "pouchdb-erase": "^1.0.2",
+    "pouchdb-full-sync": "^1.0.5",
+    "pouchdb-upsert": "^2.0.2",
+    "transform-pouch": "^1.1.3"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.14.0",
+    "babel-plugin-syntax-async-functions": "^6.8.0",
+    "babel-plugin-transform-regenerator": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "chai": "^3.5.0",
+    "jest": "^16.0.1"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage",
+    "coverageReporters": [
+      "lcov"
+    ],
+    "collectCoverageFrom": [
+      "lib/**"
+    ]
+  }
+}
