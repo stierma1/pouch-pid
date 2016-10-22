@@ -32,7 +32,7 @@ module.exports.main = function () {
             doc = _context.sent;
 
 
-            if (result) {
+            if (doc) {
               System.send(returnPid, ["OK", doc]);
             } else if (error) {
               System.send(returnPid, ["ERR", error.name, error.message]);
