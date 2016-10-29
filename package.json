@@ -1,10 +1,10 @@
 {
   "name": "pouch-pid",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "",
-  "main": "built/initialize.js",
+  "main": "lib/initialize.js",
   "scripts": {
-    "test": "jest"
+    "test": "node --harmony ./node_modules/jest/bin/jest"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   "dependencies": {
     "geopouch": "^2.0.3",
     "memdown": "^1.2.2",
-    "pid-system": "^2.0.3",
+    "pid-system": "^3.0.0",
     "pouch-datalog": "^1.0.0",
     "pouchdb": "^6.0.0",
     "pouchdb-erase": "^1.0.2",

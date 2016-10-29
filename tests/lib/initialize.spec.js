@@ -61,7 +61,7 @@ describe("#initialize",  function(){
     var echo = await echoPid();
     var pid = await mock();
 
-    System.send(pid, [{name:"stuff"}, null, echo.pid]);
+    System.send(pid, [{name:"stuff"}, {db:require("memdown")}, echo.pid]);
     var message = await echo.prom;
     expect(message[0]).to.equal("OK");
     expect(message[1]).to.not.be.undefined;
@@ -74,11 +74,12 @@ describe("#initialize",  function(){
     var echo = await echoPid();
     var pid = await mock();
 
-    System.send(pid, [{name:"stuff", type:"synced", sync:{remote:{url:"http://www.fake.com"}}}, null, echo.pid]);
+    System.send(pid, [{name:"stuff", type:"synced", sync:{remote:{url:"http://www.fake.com"}}}, {db:require("memdown")}, echo.pid]);
     var message = await echo.prom;
     expect(message[0]).to.equal("OK");
     expect(message[1]).to.not.be.undefined;
     expect(message[2]).to.not.be.null;
+    message[2].cancel();
     cleanUpPids.push(message[1]);
     //expect(System.getConfig()).to.have.property("pouchModules");
   })
@@ -87,7 +88,7 @@ describe("#initialize",  function(){
     var echo = await echoPid();
     var pid = await mock();
 
-    System.send(pid, [{name:"stuff", type:"fully-synced", sync:{remote:{url:"http://www.fake.com"}}}, null, echo.pid]);
+    System.send(pid, [{name:"stuff", type:"fully-synced", sync:{remote:{url:"http://www.fake.com"}}}, {db:require("memdown")}, echo.pid]);
     var message = await echo.prom;
     expect(message[0]).to.equal("OK");
     expect(message[1]).to.not.be.undefined;

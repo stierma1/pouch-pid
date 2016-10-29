@@ -25,10 +25,12 @@ jest.mock(path.join(process.cwd(), "./lib/db/handlers/fully-sync"));
 jest.mock(path.join(process.cwd(), "./lib/db/handlers/replicate-to"));
 jest.mock(path.join(process.cwd(), "./lib/db/handlers/replicate-from"));
 jest.mock(path.join(process.cwd(), "./lib/db/handlers/sync"));
+jest.mock(path.join(process.cwd(), "./lib/db/handlers/view-cleanup"));
 
 jest.mock(path.join(process.cwd(), "./lib/db/query/dataquery"));
 jest.mock(path.join(process.cwd(), "./lib/db/query/query"));
 jest.mock(path.join(process.cwd(), "./lib/db/query/changes"));
+jest.mock(path.join(process.cwd(), "./lib/db/query/gql"))
 
 function mockClosure (cleanUpPids){
   return function (options){
@@ -143,6 +145,15 @@ describe("#db", async function(){
     var echo = await echoPid();
     var pid = await mock();
     System.send(pid, ["erase", echo.pid]);
+    var message = await echo.prom;
+    expect(message[0]).to.be.undefined;
+    expect(message[1]).to.equal(echo.pid);
+  })
+
+  it("view-cleanup should work", async function(){
+    var echo = await echoPid();
+    var pid = await mock();
+    System.send(pid, ["view-cleanup", echo.pid]);
     var message = await echo.prom;
     expect(message[0]).to.be.undefined;
     expect(message[1]).to.equal(echo.pid);
@@ -286,6 +297,28 @@ describe("#db", async function(){
     var echo = await echoPid();
     var pid = await mock();
     System.send(pid, ["query", "query", echo.pid]);
+    var message = await echo.prom;
+    expect(message[0]).to.be.undefined;
+    expect(message[1]).to.equal("query");
+    expect(message[2]).to.be.undefined;
+    expect(message[3]).to.equal(echo.pid);
+  })
+
+  it("should invoke gql", async function(){
+    var echo = await echoPid();
+    var pid = await mock();
+    System.send(pid, ["gql", "query", "options", echo.pid]);
+    var message = await echo.prom;
+    expect(message[0]).to.be.undefined;
+    expect(message[1]).to.equal("query");
+    expect(message[2]).to.equal("options");
+    expect(message[3]).to.equal(echo.pid);
+  })
+
+  it("should invoke gql - without options", async function(){
+    var echo = await echoPid();
+    var pid = await mock();
+    System.send(pid, ["gql", "query", echo.pid]);
     var message = await echo.prom;
     expect(message[0]).to.be.undefined;
     expect(message[1]).to.equal("query");
